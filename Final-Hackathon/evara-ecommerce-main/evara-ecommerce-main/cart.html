@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!--=============== FLATICON ===============-->
+  <link
+    rel="stylesheet"
+    href="https://cdn-uicons.flaticon.com/2.0.0/uicons-regular-straight/css/uicons-regular-straight.css"
+  />
+
+  <!--=============== SWIPER CSS ===============-->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+  />
+
+  <!--=============== CSS ===============-->
+  <link rel="stylesheet" href="./assets/css/styles.css" />
+  <link rel="stylesheet" href="./assets/css/custom.css" />
+
+  <style>
+    .cart__table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0 1rem;
+    }
+    .cart__table tr {
+      background-color: #fff;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    .cart__table td {
+      padding: 1rem;
+      vertical-align: top;
+    }
+    .btn--sm {
+      cursor: pointer;
+    }
+    #saved-items ul {
+      padding: 0;
+    }
+    #saved-items li {
+      background-color: #fff;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+  </style>
+
+  <title>Cart - Evara</title>
+</head>
+<body>
+  <!--=============== HEADER ===============-->
+  <header class="header">
+    <div class="header__top">
+      <div class="header__container container">
+        <div class="header__contact">
+          <span><a href="tel:+91 8733978801" style="color: black;">+91 8733978801</a></span>
+          <span>Our location</span>
+        </div>
+        <p class="header__alert-news">
+          Super Values Deals - Save more coupons
+        </p>
+        <a href="login-register.html" class="header__top-action">
+          Log In / Sign Up
+        </a>
+      </div>
+    </div>
+
+    <nav class="nav container">
+      <a href="index.html" class="nav__logo">
+        <img
+          class="nav__logo-img"
+          src="assets/img/logo.svg"
+          alt="website logo"
+        />
+      </a>
+      <div class="nav__menu" id="nav-menu">
+        <ul class="nav__list">
+          <li class="nav__item">
+            <a href="index.html" class="nav__link">Home</a>
+          </li>
+          <li class="nav__item">
+            <a href="shop.html" class="nav__link active-link">Shop</a>
+          </li>
+          <li class="nav__item">
+            <a href="accounts.html" class="nav__link">My Account</a>
+          </li>
+          <li class="nav__item">
+            <a href="compare.html" class="nav__link">Compare</a>
+          </li>
+          <li class="nav__item">
+            <a href="login-register.html" class="nav__link">Login</a>
+          </li>
+        </ul>
+        <div class="header__search">
+          <input
+            type="text"
+            placeholder="Search For Items..."
+            class="form__input"
+          />
+          <button class="search__btn">
+            <img src="assets/img/search.png" alt="search icon" />
+          </button>
+        </div>
+      </div>
+      <div class="header__user-actions">
+        <a href="wishlist.html" class="header__action-btn" title="Wishlist">
+          <img src="assets/img/icon-heart.svg" alt="" />
+          <span class="count">0</span>
+        </a>
+        <a href="cart.html" class="header__action-btn" title="Cart">
+          <img src="assets/img/icon-cart.svg" alt="" />
+          <span class="count">0</span>
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  <!--=============== MAIN ===============-->
+  <!--=============== MAIN ===============-->
+  <main class="main">
+    <!--=============== BREADCRUMB ===============-->
+    <section class="breadcrumb">
+      <ul class="breadcrumb__list flex container">
+        <li><a href="index.html" class="breadcrumb__link">Home</a></li>
+        <li><span class="breadcrumb__link">></span></li>
+        <li><span class="breadcrumb__link">Shopping Cart</span></li>
+      </ul>
+    </section>
+
+    <!--=============== CART ===============-->
+    <section class="cart section container">
+      <h2 class="section__title">Shopping Cart</h2>
+      <div class="cart__container">
+        <table class="cart__table">
+          <thead>
+            <tr>
+              <th>image</th>
+              <th>Product</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Subtotal</th>
+              <th>Remove</th>
+            </tr>
+          </thead>
+          <tbody id="cart-items">
+            <!-- Cart items will be dynamically inserted here -->
+          </tbody>
+        </table>
+        <div id="empty-cart-message" style="display: none;">
+          <p>Your cart is empty. <a href="shop.html">Continue shopping</a></p>
+        </div>
+        <div class="cart__actions">
+          <a href="shop.html" class="btn btn--md">Continue Shopping Cart</a>
+          <a href="checkout.html" class="btn btn--md">Proceed to Shopping Cart Checkout</a>
+        </div>
+        <div class="cart__summary">
+          <h3>Cart Totals</h3>
+          <table>
+            <tr>
+              <td>Subtotal</td>
+              <td id="cart-subtotal">₹0.00</td>
+            </tr>
+            <tr>
+              <td>Shipping</td>
+              <td>Free Shipping</td>
+            </tr>
+            <tr>
+              <td>Total</td>
+              <td id="cart-total">₹0.00</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div id="saved-items"></div>
+    </section>
+  </main>
+
+    <!--=============== FOOTER ===============-->
+    <footer class="footer container">
+      <div class="footer__container grid">
+        <div class="footer__content">
+          <a href="index.html" class="footer__logo">
+            <img src="./assets/img/logo.svg" alt="" class="footer__logo-img" />
+          </a>
+          <h4 class="footer__subtitle">Contact</h4>
+          <p class="footer__description">
+            <span>Address:</span> Marwadi University, Morbi Highway, Rajkot
+          </p>
+          <p class="footer__description">
+            <span>Phone:</span> +91 8733978801 / +91 6354746459 / +91 9054101116
+          </p>
+          <p class="footer__description">
+            <span>Hours:</span> 10:00 - 18:00, Mon - Sat
+          </p>
+          <div class="footer__social">
+            <h4 class="footer__subtitle">Follow Me</h4>
+            <div class="footer__links flex">
+              <a href="#">
+                <img
+                  src="./assets/img/icon-facebook.svg"
+                  alt=""
+                  class="footer__social-icon"
+                />
+              </a>
+              <a href="#">
+                <img
+                  src="./assets/img/icon-twitter.svg"
+                  alt=""
+                  class="footer__social-icon"
+                />
+              </a>
+              <a href="#">
+                <img
+                  src="./assets/img/icon-instagram.svg"
+                  alt=""
+                  class="footer__social-icon"
+                />
+              </a>
+              <a href="#">
+                <img
+                  src="./assets/img/icon-pinterest.svg"
+                  alt=""
+                  class="footer__social-icon"
+                />
+              </a>
+              <a href="#">
+                <img
+                  src="./assets/img/icon-youtube.svg"
+                  alt=""
+                  class="footer__social-icon"
+                />
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="footer__content">
+          <h3 class="footer__title">Address</h3>
+          <ul class="footer__links">
+            <li><a href="#" class="footer__link">About Us</a></li>
+            <li><a href="#" class="footer__link">Delivery Information</a></li>
+            <li><a href="#" class="footer__link">Privacy Policy</a></li>
+            <li><a href="#" class="footer__link">Terms & Conditions</a></li>
+            <li><a href="#" class="footer__link">Contact Us</a></li>
+            <li><a href="#" class="footer__link">Support Center</a></li>
+          </ul>
+        </div>
+        <div class="footer__content">
+          <h3 class="footer__title">My Account</h3>
+          <ul class="footer__links">
+            <li><a href="#" class="footer__link">Sign In</a></li>
+            <li><a href="#" class="footer__link">View Cart</a></li>
+            <li><a href="#" class="footer__link">My Wishlist</a></li>
+            <li><a href="#" class="footer__link">Track My Order</a></li>
+            <li><a href="#" class="footer__link">Help</a></li>
+            <li><a href="#" class="footer__link">Order</a></li>
+          </ul>
+        </div>
+        <div class="footer__content">
+          <h3 class="footer__title">Secured Payed Gateways</h3>
+          <img
+            src="./assets/img/payment-method.png"
+            alt=""
+            class="payment__img"
+          />
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p class="copyright">&copy; 2024 Evara. All right reserved</p>
+        <span class="designer">Designer by ShopWare Tech</span>
+      </div>
+    </footer>
+
+  <!--=============== MAIN JS ===============-->
+  <script src="assets/js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      displayCart();
+      displaySavedItems();
+    });
+
+    function addToCart(item) {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const existingItemIndex = cart.findIndex(cartItem => cartItem.id === item.id);
+    
+      if (existingItemIndex !== -1) {
+        const confirmIncrease = confirm(`${item.name} is already in your cart. Do you want to increase the quantity?`);
+        if (confirmIncrease) {
+          cart[existingItemIndex].quantity = (cart[existingItemIndex].quantity || 1) + 1;
+        }
+      } else {
+        // Ensure quantity is set to 1 for new items
+        item.quantity = 1;
+        cart.push(item);
+      }
+    
+      localStorage.setItem('cart', JSON.stringify(cart));
+      displayCart();
+      updateCartCount();
+    }
+    
+    function updateQuantity(index, newQuantity) {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      // Ensure quantity is at least 1
+      cart[index].quantity = Math.max(1, newQuantity || 1);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      displayCart();
+    }
+
+    function displayCart() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const cartItemsContainer = document.getElementById('cart-items');
+      const cartSubtotal = document.getElementById('cart-subtotal');
+      const cartTotal = document.getElementById('cart-total');
+      const emptyCartMessage = document.getElementById('empty-cart-message');
+      let subtotal = 0;
+    
+      cartItemsContainer.innerHTML = '';
+    
+      if (cart.length === 0) {
+        emptyCartMessage.style.display = 'block';
+        document.querySelector('.cart__table').style.display = 'none';
+        document.querySelector('.cart__summary').style.display = 'none';
+      } else {
+        emptyCartMessage.style.display = 'none';
+        document.querySelector('.cart__table').style.display = 'table';
+        document.querySelector('.cart__summary').style.display = 'block';
+    
+        cart.forEach((item, index) => {
+          const itemSubtotal = parseFloat(item.price.replace('₹', '')) * item.quantity;
+          subtotal += itemSubtotal;
+          
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>
+              <img src="${item.image || '/placeholder.svg?height=100&width=100'}" alt="${item.name}" style="width: 100px; height: 100px; object-fit: cover; border-radius: 4px;">
+            </td>
+            <td>
+              <h3 style="margin: 0; font-size: 1.1rem;">${item.name}</h3>
+              <p style="margin: 0.5rem 0 0; color: #007600; font-size: 0.9rem;">In Stock</p>
+              <p style="margin: 0.5rem 0 0; font-size: 0.9rem;">Eligible for FREE Shipping</p>
+              <div style="margin-top: 0.5rem;">
+                <label style="font-size: 0.9rem; color: #565959;">
+                  <input type="checkbox" style="margin-right: 0.5rem;"> This is a gift
+                </label>
+              </div>
+            </td>
+            <td style="font-weight: bold; font-size: 1.1rem;">${item.price}</td>
+            <td>
+              <div style="display: flex; align-items: center; gap: 0.5rem;">
+                <button onclick="updateQuantity(${index}, Math.max(1, ${item.quantity} - 1))" class="btn btn--sm" style="padding: 0.2rem 0.5rem; background: #008296; color: white;">-</button>
+                <span>${item.quantity}</span>
+                <button onclick="updateQuantity(${index}, ${item.quantity} + 1)" class="btn btn--sm" style="padding: 0.2rem 0.5rem; background: #008296; color: white;">+</button>
+              </div>
+            </td>
+            <td style="font-weight: bold; font-size: 1.1rem;">₹${itemSubtotal.toFixed(2)}</td>
+            <td>
+              <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                <button onclick="removeFromCart(${index})" class="btn btn--sm" style="color: #007185; background: none; border:collaps;">Remove from Cart</button>
+                <button onclick="saveForLater(${index})" class="btn btn--sm" style="color: #007185; background: none; border: collaps;">Save for Later</button>
+              </div>
+            </td>
+          `;
+          cartItemsContainer.appendChild(row);
+        });
+      }
+
+      cartSubtotal.textContent = `₹${subtotal.toFixed(2)}`;
+  cartTotal.textContent = `₹${subtotal.toFixed(2)}`;
+  updateCartCount();
+}
+
+    function updateQuantity(index, newQuantity) {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart[index].quantity = Math.max(1, newQuantity); // Ensure quantity is at least 1
+      localStorage.setItem('cart', JSON.stringify(cart));
+      displayCart();
+    }
+
+    function removeFromCart(index) {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart.splice(index, 1);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      displayCart();
+    }
+
+    function updateCartCount() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const cartCount = document.querySelector('.header__action-btn[title="Cart"] .count');
+      cartCount.textContent = cart.reduce((total, item) => total + item.quantity, 0);
+    }
+
+    function saveForLater(index) {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      let savedItems = JSON.parse(localStorage.getItem('savedItems')) || [];
+      
+      const item = cart.splice(index, 1)[0];
+      savedItems.push(item);
+      
+      localStorage.setItem('cart', JSON.stringify(cart));
+      localStorage.setItem('savedItems', JSON.stringify(savedItems));
+      
+      displayCart();
+      displaySavedItems();
+    }
+
+    function displaySavedItems() {
+      const savedItems = JSON.parse(localStorage.getItem('savedItems')) || [];
+      const savedItemsContainer = document.getElementById('saved-items');
+      
+      if (savedItems.length > 0) {
+        let html = '<h3 style="margin-top: 2rem; border-top: 1px solid #DDD; padding-top: 1rem;">Saved for later</h3><ul style="list-style: none; padding: 0;">';
+        savedItems.forEach((item, index) => {
+          html += `
+            <li style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid #DDD;">
+              <img src="${item.image || '/placeholder.svg?height=100&width=100'}" alt="${item.name}" style="width: 100px; height: 100px; object-fit: cover; border-radius: 4px;">
+              <div>
+                <h4 style="margin: 0; font-size: 1.1rem;">${item.name}</h4>
+                <p style="margin: 0.5rem 0; font-weight: bold;">${item.price}</p>
+                <p style="margin: 0.5rem 0 0; color: #007600; font-size: 0.9rem;">In Stock</p>
+                <div style="margin-top: 0.5rem;">
+                  <button onclick="moveToCart(${index})" class="btn btn--sm" style="color: #007185; background: none; border: none; padding: 0; margin-right: 1rem;">Move to Shopping Cart</button>
+                  <button onclick="removeFromSaved(${index})" class="btn btn--sm" style="color: #007185; background: none; border: none; padding: 0;">Remove from Saved Shopping Cart Items</button>
+                </div>
+              </div>
+            </li>
+          `;
+        });
+        html += '</ul>';
+        savedItemsContainer.innerHTML = html;
+      } else {
+        savedItemsContainer.innerHTML = '';
+      }
+    }
+
+    function moveToCart(index) {
+      let savedItems = JSON.parse(localStorage.getItem('savedItems')) || [];
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      
+      const item = savedItems.splice(index, 1)[0];
+      addToCart(item); // Use addToCart function to handle potential duplicates
+      
+      localStorage.setItem('savedItems', JSON.stringify(savedItems));
+      displayCart();
+      displaySavedItems();
+    }
+
+    function removeFromSaved(index) {
+      let savedItems = JSON.parse(localStorage.getItem('savedItems')) || [];
+      savedItems.splice(index, 1);
+      localStorage.setItem('savedItems', JSON.stringify(savedItems));
+      displaySavedItems();
+    }
+  </script>
+</body>
+</html>
